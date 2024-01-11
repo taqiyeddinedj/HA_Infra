@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myapp-argo-application
+  namespace: nextcloud
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/taqiyeddinedj/HA_Infra.git
+    targetRevision: HEAD
+    path: nextCloud
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nextcloud
+  
+  syncPolicy:
+    syncOptions:
+    - CreateNamespce=true
+    automated:
+      selfHeal: true
+      prune: true

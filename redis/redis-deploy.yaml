@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: nextcloud
+  labels:
+    app: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - image: redis:alpine
+          name: redis
+          ports:
+            - containerPort: 6379
+          # I need to add Time zone env variables
+      restartPolicy: Always
