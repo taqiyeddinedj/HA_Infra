@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  namespace: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: frontend 
+        image: node:14
+        command: ["npm", "start", "--prefix", "/app/frontend"]
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - name: frontend-code
+          mountPath: /app/frontend
+
+      - name: backend
+        image: node:14
+        command: ["node", "/app/backend/backend.js"]
+        ports:
+        - containerPort: 3001
+        volumeMounts: 
+        - name: backend-code
+          mountPath: /app/backend
+
+        - name: node-modules
+          mountPath: /node_modules
+          
+      volumes:
+      - name: frontend-code
+        hostPath:
+          path: /home/touk/workload/webapp/frontend
+          type: Directory
+
+      - name: backend-code
+        hostPath:  
+          path: /home/touk/workload/webapp
+          type: Directory
+
+      - name: node-modules
+        hostPath:
+          path: /home/touk/workload/webapp/node_modules

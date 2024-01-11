@@ -1,7 +1,9 @@
+#Not yet to be deployed
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nextcloud-ingress
+  namespace: nextcloud
   labels:
     name: nextcloud-ingress
 spec:

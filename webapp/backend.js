@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3001;
 
-// Connect to MongoDB
+// Connect to MongoDB using the Kubernetes service name
 mongoose.connect('mongodb://mongodb-service:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
