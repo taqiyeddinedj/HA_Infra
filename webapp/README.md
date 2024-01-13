@@ -1,0 +1,2 @@
+# Introducing DOCKERFILE in the futur
+Since the purpose of this project was purely deployment, I haven't build the docker image but instead i mounted the code directly into the container from my hostPath
