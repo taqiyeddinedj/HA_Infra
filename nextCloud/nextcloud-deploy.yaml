@@ -35,8 +35,6 @@ spec:
               name: database-secrets
               key: MYSQL_PASSWORD
 
-
-
         volumeMounts:
         - mountPath: /var/www/html
           name: nextcloud-storage
@@ -51,7 +49,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nextcloud
+  name: nextcloud-svc
+  namespace: nextcloud
 spec:
   type: NodePort
   selector:

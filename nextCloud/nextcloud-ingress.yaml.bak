@@ -2,19 +2,25 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
   name: nextcloud-ingress
   namespace: nextcloud
   labels:
     name: nextcloud-ingress
 spec:
   rules:
-  - host: nextcloud.icosnet.com
+  - host: nextcloud.icosnet.dz
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: <Service>
+            name: nextcloud
             port: 
-              number: <Port>
+              number: 80
+  tls:
+  - hosts:
+    - nextcloud.icosnet.dz
+    secretName: wapapp-tls-ca-key-pair
